@@ -1,0 +1,2626 @@
+{
+  "selected": "plans/final_selection_20261113T145218373087Z.csv",
+  "sha256": "929ab8810425985eabba875a453cdcaaab675963fd0f8543253e9f356b50699f",
+  "local_final": "submission/final.csv",
+  "backup": null,
+  "incumbent": "plans/level4robust_all_trucks_20261113.csv",
+  "accepted_after_independent_check": true,
+  "selection": {
+    "plans/level3_20261113T130545853303Z.csv": {
+      "mean": 3734113.1365119424,
+      "std": 310225.73315375485,
+      "minimum": 3238798.4072723724,
+      "p10": 3348120.494375323,
+      "lower_tail_mean": 3262378.499277875
+    },
+    "plans/level4_20261113T134857657528Z.csv": {
+      "mean": 3739636.145563162,
+      "std": 311808.85542734095,
+      "minimum": 3242427.9072723724,
+      "p10": 3351749.994375323,
+      "lower_tail_mean": 3266007.999277875
+    },
+    "plans/Level4robust.csv": {
+      "mean": 3742354.3730452983,
+      "std": 308691.4892920691,
+      "minimum": 3249616.3248910652,
+      "p10": 3358929.4781607795,
+      "lower_tail_mean": 3273190.2029248765
+    },
+    "plans/level4robust_all_trucks_20261113.csv": {
+      "mean": 3754899.8730452983,
+      "std": 308691.4892920691,
+      "minimum": 3262161.8248910652,
+      "p10": 3371474.9781607795,
+      "lower_tail_mean": 3285735.7029248765
+    },
+    "searched": {
+      "mean": 3852706.6659041094,
+      "std": 314099.20207528136,
+      "minimum": 3349144.7680252045,
+      "p10": 3460575.8262824505,
+      "lower_tail_mean": 3372868.6722405506
+    }
+  },
+  "independent_check": {
+    "incumbent": {
+      "mean": 3649680.179343071,
+      "std": 371611.2207990867,
+      "minimum": 2947177.2059041997,
+      "p10": 3172038.8947775583,
+      "lower_tail_mean": 3010002.605848796
+    },
+    "searched": {
+      "mean": 3745297.357464565,
+      "std": 378004.46460075234,
+      "minimum": 3031551.655611573,
+      "p10": 3258577.9317951836,
+      "lower_tail_mean": 3095156.019548763
+    }
+  },
+  "paired_gain": {
+    "mean": 95617.17812149465,
+    "std": 7345.944428385811,
+    "minimum": 84374.44970737305,
+    "p10": 85947.38595063305,
+    "lower_tail_mean": 85035.18256905838
+  },
+  "paired_gain_standard_error": 1298.5917798827859,
+  "counts": {
+    "action_rows": 49,
+    "cars_add": 39,
+    "cars_remove": 233,
+    "cars_transfer": 556,
+    "driver_rows": 0,
+    "cars_driver": 0,
+    "truck_rows": 33,
+    "cars_truck": 556
+  },
+  "cost_only_check": {
+    "changed_modes": 7,
+    "before": 61500.0,
+    "after": 48954.5,
+    "saving": 12545.5,
+    "fleet_and_transit_identical": true
+  },
+  "search": {
+    "tested": {
+      "cancel": 928,
+      "replace_addition_transfer": 2980,
+      "new_add": 8000,
+      "align_truck_group": 208,
+      "resize_add": 722,
+      "new_remove": 8000,
+      "shared_truck_add": 27000,
+      "date_add": 853,
+      "reallocate_add": 3825,
+      "new_transfer": 72000,
+      "resize_remove": 540,
+      "date_remove": 280,
+      "reallocate_remove": 2520,
+      "resize_transfer": 2008,
+      "date_transfer": 1336,
+      "mode": 540,
+      "destination": 4320,
+      "origin": 4320
+    },
+    "invalid": {
+      "new_add": 2250,
+      "align_truck_group": 68,
+      "new_remove": 8000,
+      "resize_add": 173,
+      "replace_addition_transfer": 757,
+      "shared_truck_add": 7227,
+      "new_transfer": 21312,
+      "resize_remove": 280,
+      "reallocate_remove": 1882,
+      "origin": 3228,
+      "resize_transfer": 258,
+      "date_transfer": 147,
+      "cancel": 9,
+      "destination": 72
+    },
+    "trace": [
+      {
+        "round": 1,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3766455.8730452964,
+        "edits": [
+          {
+            "key": [
+              "add",
+              4,
+              3,
+              9,
+              -1,
+              ""
+            ],
+            "delta": -8
+          },
+          {
+            "key": [
+              "transfer",
+              2,
+              3,
+              4,
+              9,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 2,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3775441.111992878,
+        "edits": [
+          {
+            "key": [
+              "add",
+              4,
+              2,
+              2,
+              -1,
+              ""
+            ],
+            "delta": -8
+          },
+          {
+            "key": [
+              "transfer",
+              3,
+              2,
+              5,
+              2,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 3,
+        "kind": "new_transfer",
+        "selection_mean": 3784222.062235874,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              3,
+              4,
+              7,
+              "truck"
+            ],
+            "delta": 16
+          }
+        ]
+      },
+      {
+        "round": 4,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3791541.2014706996,
+        "edits": [
+          {
+            "key": [
+              "add",
+              1,
+              0,
+              1,
+              -1,
+              ""
+            ],
+            "delta": -13
+          },
+          {
+            "key": [
+              "transfer",
+              0,
+              0,
+              0,
+              1,
+              "truck"
+            ],
+            "delta": 13
+          }
+        ]
+      },
+      {
+        "round": 5,
+        "kind": "new_transfer",
+        "selection_mean": 3798818.5428598393,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              3,
+              2,
+              4,
+              9,
+              "truck"
+            ],
+            "delta": 16
+          }
+        ]
+      },
+      {
+        "round": 6,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3805177.9721524045,
+        "edits": [
+          {
+            "key": [
+              "add",
+              4,
+              2,
+              9,
+              -1,
+              ""
+            ],
+            "delta": -8
+          },
+          {
+            "key": [
+              "transfer",
+              2,
+              2,
+              1,
+              9,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 7,
+        "kind": "new_transfer",
+        "selection_mean": 3811280.2384920195,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              3,
+              0,
+              1,
+              "truck"
+            ],
+            "delta": 16
+          }
+        ]
+      },
+      {
+        "round": 8,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3816091.7384920195,
+        "edits": [
+          {
+            "key": [
+              "add",
+              4,
+              3,
+              8,
+              -1,
+              ""
+            ],
+            "delta": -4
+          },
+          {
+            "key": [
+              "transfer",
+              2,
+              3,
+              4,
+              8,
+              "truck"
+            ],
+            "delta": 4
+          }
+        ]
+      },
+      {
+        "round": 9,
+        "kind": "cancel",
+        "selection_mean": 3820884.8604548806,
+        "edits": [
+          {
+            "key": [
+              "add",
+              0,
+              3,
+              8,
+              -1,
+              ""
+            ],
+            "delta": -5
+          }
+        ]
+      },
+      {
+        "round": 10,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3825244.3604548806,
+        "edits": [
+          {
+            "key": [
+              "add",
+              4,
+              3,
+              1,
+              -1,
+              ""
+            ],
+            "delta": -3
+          },
+          {
+            "key": [
+              "transfer",
+              3,
+              3,
+              0,
+              1,
+              "truck"
+            ],
+            "delta": 3
+          }
+        ]
+      },
+      {
+        "round": 11,
+        "kind": "shared_truck_add",
+        "selection_mean": 3829252.569078219,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              3,
+              2,
+              7,
+              6,
+              "truck"
+            ],
+            "delta": 4
+          },
+          {
+            "key": [
+              "transfer",
+              3,
+              3,
+              7,
+              6,
+              "truck"
+            ],
+            "delta": 4
+          }
+        ]
+      },
+      {
+        "round": 12,
+        "kind": "new_transfer",
+        "selection_mean": 3833089.257938158,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              0,
+              4,
+              9,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 13,
+        "kind": "new_transfer",
+        "selection_mean": 3836449.0379623305,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              3,
+              4,
+              8,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 14,
+        "kind": "new_transfer",
+        "selection_mean": 3839683.131326531,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              3,
+              0,
+              2,
+              "truck"
+            ],
+            "delta": 16
+          }
+        ]
+      },
+      {
+        "round": 15,
+        "kind": "destination",
+        "selection_mean": 3843453.9746351624,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              3,
+              2,
+              5,
+              2,
+              "truck"
+            ],
+            "delta": -8
+          },
+          {
+            "key": [
+              "transfer",
+              3,
+              2,
+              5,
+              6,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 16,
+        "kind": "replace_addition_transfer",
+        "selection_mean": 3845642.574375595,
+        "edits": [
+          {
+            "key": [
+              "add",
+              1,
+              1,
+              3,
+              -1,
+              ""
+            ],
+            "delta": -8
+          },
+          {
+            "key": [
+              "transfer",
+              0,
+              1,
+              5,
+              3,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 17,
+        "kind": "cancel",
+        "selection_mean": 3847741.9540381096,
+        "edits": [
+          {
+            "key": [
+              "add",
+              1,
+              1,
+              2,
+              -1,
+              ""
+            ],
+            "delta": -6
+          }
+        ]
+      },
+      {
+        "round": 18,
+        "kind": "new_transfer",
+        "selection_mean": 3849589.0384102715,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              3,
+              0,
+              7,
+              6,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 19,
+        "kind": "new_transfer",
+        "selection_mean": 3851234.3162817317,
+        "edits": [
+          {
+            "key": [
+              "transfer",
+              0,
+              3,
+              0,
+              3,
+              "truck"
+            ],
+            "delta": 8
+          }
+        ]
+      },
+      {
+        "round": 20,
+        "kind": "cancel",
+        "selection_mean": 3852706.6659041084,
+        "edits": [
+          {
+            "key": [
+              "add",
+              1,
+              1,
+              3,
+              -1,
+              ""
+            ],
+            "delta": -7
+          }
+        ]
+      }
+    ],
+    "stop": "round_limit",
+    "runtime_seconds": 154.3423655000006,
+    "budget_seconds": 300.0,
+    "max_rounds": 20
+  },
+  "selection_components": {
+    "plans/level3_20261113T130545853303Z.csv": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3321970.327344913,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3505625.134833008
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3323929.1622028975,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3507583.9696909925
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3815220.9902401804,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3998875.797728276
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4044452.774119918,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 4228107.581608012
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3420535.896340358,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3604190.703828453
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3875274.222540136,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 4058929.0300282314
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3887018.2765343846,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 4070673.084022479
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3055143.5997842774,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3238798.4072723724
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3102303.783795282,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3285958.5912833773
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3226627.5899791736,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3410282.3974672686
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3401197.097021877,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3584851.904509972
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3653147.5686711683,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3836802.376159264
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3419154.0107496395,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3602808.818237735
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3624644.91054153,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3808299.718029625
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3960020.548657999,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 4143675.3561460935
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3676692.5058578206,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 61500.0,
+        "profit": 3860347.3133459156
+      }
+    ],
+    "plans/level4_20261113T134857657528Z.csv": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3321970.327344913,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3509254.634833008
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3323929.1622028975,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3511213.4696909925
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3815861.1190544716,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 4003145.426542567
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4050835.3179798494,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 4238119.625467945
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3420535.896340358,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3607820.203828453
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3879108.469734327,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 4066392.777222422
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3887366.6901202807,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 4074650.9976083757
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3055143.5997842774,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3242427.9072723724
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3102303.783795282,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3289588.0912833773
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3226627.5899791736,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3413911.8974672686
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3401197.097021877,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3588481.404509972
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3655046.0973109184,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3842330.4047990134
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3422075.297922094,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3609359.6054101884
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3629713.420271951,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3816997.727760046
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3964651.6242981185,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 4151935.931786213
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3681263.9160402818,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 57870.5,
+        "profit": 3868548.223528377
+      }
+    ],
+    "plans/Level4robust.csv": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3318805.2318957034,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3514538.039383799
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3320384.111593634,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3516116.919081729
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3811162.1322511355,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 4006894.939739231
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4039251.659642503,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 4234984.467130598
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3417849.756741509,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3613582.564229604
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3869077.4085099646,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 4064810.215998059
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3882148.2944790265,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 4077881.1019671215
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3053883.51740297,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3249616.3248910652
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3101031.2734705927,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3296764.0809586877
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3225362.067874776,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3421094.875362871
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3399732.668247061,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3595465.475735156
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3648106.1446756027,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3843838.952163698
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3414044.062929102,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3609776.8704171972
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3621057.66708803,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3816790.474576125
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3953532.4659637185,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 4149265.2734518135
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3670516.5861499207,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 61500.0,
+        "profit": 3866249.3936380157
+      }
+    ],
+    "plans/level4robust_all_trucks_20261113.csv": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3318805.2318957034,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3527083.539383799
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3320384.111593634,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3528662.419081729
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3811162.1322511355,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4019440.439739231
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4039251.659642503,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4247529.967130598
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3417849.756741509,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3626128.064229604
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3869077.4085099646,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4077355.715998059
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3882148.2944790265,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4090426.6019671215
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3053883.51740297,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3262161.8248910652
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3101031.2734705927,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3309309.5809586877
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3225362.067874776,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3433640.375362871
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3399732.668247061,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3608010.975735156
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3648106.1446756027,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3856384.452163698
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3414044.062929102,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3622322.3704171972
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3621057.66708803,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3829335.974576125
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3953532.4659637185,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4161810.7734518135
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3670516.5861499207,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3878794.8936380157
+      }
+    ],
+    "searched": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3339564.1190981464,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3623816.4265862415
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3341777.364347279,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3626029.671835374
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3835202.8955907626,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4119455.2030788576
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4066947.8468738836,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4351200.154361978
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3438419.8951471094,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3722672.2026352044
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3897607.86792112,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4181860.1754092146
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3908188.2929673186,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4192440.6004554136
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3064892.460537109,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3349144.7680252045
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3112340.2689678017,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3396592.5764558967
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3240306.768620909,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3524559.076109004
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3411502.0266268915,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3695754.3341149865
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3674482.3426194605,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3958734.650107555
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3439422.9357891926,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3723675.243277287
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3644471.211439644,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3928723.518927739
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3982601.788991961,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4266854.096480057
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3697541.649117642,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3981793.956605737
+      }
+    ]
+  },
+  "check_components": {
+    "incumbent": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2738898.8984161047,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 2947177.2059041997
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3087097.162356215,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3295375.4698443096
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3733047.8528664922,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3941326.1603545872
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3705975.5834281486,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3914253.890916243
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3258676.304951607,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3466954.6124397013
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3019878.5980238826,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3228156.905511977
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3589943.9126215247,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3798222.220109619
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3387091.1981447022,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3595369.5056327973
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3276807.952464972,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3485086.2599530667
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3267252.3954935432,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3475530.702981638
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3778353.263743866,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3986631.5712319613
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3745067.222705054,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3953345.530193149
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2957525.252763416,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3165803.5602515116
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3691948.92149219,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3900227.228980285
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2753442.547530037,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 2961720.8550181314
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3492251.2486720416,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3700529.556160137
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3122327.246456261,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3330605.553944356
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4171864.64232188,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4380142.949809975
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3276560.1442545513,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3484838.4517426463
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3832154.592378215,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4040432.89986631
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3380186.2551177572,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3588464.5626058523
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3628954.4504545256,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3837232.7579426207
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4050011.664030059,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4258289.971518153
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3544109.372169966,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3752387.679658061
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3471916.649724089,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3680194.9572121836
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3362428.8773126598,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3570707.184800755
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4035662.577228762,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 4243940.884716857
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3165054.0009339447,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3373332.30842204
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3609531.1226239773,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3817809.4301120723
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3568083.7729314095,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3776362.080419505
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2757030.494733247,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 2965308.802221342
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3665725.7210141188,
+        "holding_cost": 2544252.0,
+        "addition_cost": 49595.0,
+        "transfer_cost": 48954.5,
+        "profit": 3874004.028502214
+      }
+    ],
+    "searched": [
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2747299.348123478,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3031551.655611573
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3098979.5494694193,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3383231.856957514
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3760104.1514196116,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4044356.4589077067
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3733384.9860440777,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4017637.293532172
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3282698.736138534,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3566951.043626629
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3031748.759880235,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3316001.0673683304
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3612614.941766786,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3896867.2492548805
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3408762.1047386634,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3693014.412226759
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3290264.1358678527,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3574516.4433559477
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3277462.36739268,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3561714.6748807747
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3804171.344301364,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4088423.6517894585
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3772777.5778883942,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4057029.885376489
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2967945.2759100716,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3252197.583398167
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3714688.6998036546,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3998941.007291749
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2762333.311319722,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3046585.618807817
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3512661.109103993,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3796913.4165920876
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3132274.3450792828,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3416526.6525673773
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4201170.737870122,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4485423.045358217
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3287630.731043273,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3571883.0385313686
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3856057.783522811,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4140310.091010906
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3392235.4473577198,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3676487.754845815
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3654952.385836838,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3939204.693324933
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4079710.2628174163,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4363962.570305511
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3557919.3014243697,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3842171.608912464
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3497337.3342219726,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3781589.641710067
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3383306.527624486,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3667558.835112581
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 4063082.384414788,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 4347334.691902883
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3183202.9379822304,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3467455.2454703255
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3635753.836776794,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3920006.144264889
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3594365.4619634817,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3878617.769451577
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 2766036.9128894,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3050289.2203774955
+      },
+      {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3690508.8092535273,
+        "holding_cost": 2475618.0,
+        "addition_cost": 17745.0,
+        "transfer_cost": 73464.5,
+        "profit": 3974761.116741622
+      }
+    ]
+  },
+  "selection_seed": 5201,
+  "check_seed": 62013,
+  "scenario_draws": {
+    "selection": [
+      {
+        "name": "5201_0",
+        "weeks": [
+          0,
+          1
+        ],
+        "demand_multipliers": [
+          0.990048001875532,
+          0.9802752450157365
+        ],
+        "rate_multiplier": 0.9557303056424297
+      },
+      {
+        "name": "5201_1",
+        "weeks": [
+          0,
+          1
+        ],
+        "demand_multipliers": [
+          0.9967064146032484,
+          0.9868679325982712
+        ],
+        "rate_multiplier": 0.9513726475715428
+      },
+      {
+        "name": "5201_2",
+        "weeks": [
+          2,
+          0
+        ],
+        "demand_multipliers": [
+          0.9812335616984681,
+          1.0148571518547178
+        ],
+        "rate_multiplier": 1.078689249342997
+      },
+      {
+        "name": "5201_3",
+        "weeks": [
+          0,
+          2
+        ],
+        "demand_multipliers": [
+          1.177317836140987,
+          1.1383117037668868
+        ],
+        "rate_multiplier": 1.0422043586910412
+      },
+      {
+        "name": "5201_4",
+        "weeks": [
+          0,
+          2
+        ],
+        "demand_multipliers": [
+          0.9939057896120707,
+          0.9609763464261353
+        ],
+        "rate_multiplier": 0.9943537200312816
+      },
+      {
+        "name": "5201_5",
+        "weeks": [
+          3,
+          3
+        ],
+        "demand_multipliers": [
+          1.0762871431252043,
+          1.0762871431252043
+        ],
+        "rate_multiplier": 1.0429635815351685
+      },
+      {
+        "name": "5201_6",
+        "weeks": [
+          3,
+          3
+        ],
+        "demand_multipliers": [
+          1.0073560600588332,
+          1.0073560600588332
+        ],
+        "rate_multiplier": 1.0974337179673357
+      },
+      {
+        "name": "5201_7",
+        "weeks": [
+          3,
+          3
+        ],
+        "demand_multipliers": [
+          0.897325478754783,
+          0.897325478754783
+        ],
+        "rate_multiplier": 0.9465500829926439
+      },
+      {
+        "name": "5201_8",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          0.9154318848422146,
+          0.8920287797021361
+        ],
+        "rate_multiplier": 0.9603031563408403
+      },
+      {
+        "name": "5201_9",
+        "weeks": [
+          2,
+          3
+        ],
+        "demand_multipliers": [
+          0.9415981946041243,
+          0.9395994518479647
+        ],
+        "rate_multiplier": 0.9614504612266146
+      },
+      {
+        "name": "5201_10",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          0.8758675826079535,
+          0.8534759427011861
+        ],
+        "rate_multiplier": 1.094086807589935
+      },
+      {
+        "name": "5201_11",
+        "weeks": [
+          1,
+          0
+        ],
+        "demand_multipliers": [
+          1.0319794699527391,
+          1.0422676869565122
+        ],
+        "rate_multiplier": 1.0079209417512158
+      },
+      {
+        "name": "5201_12",
+        "weeks": [
+          1,
+          1
+        ],
+        "demand_multipliers": [
+          1.0583202159858307,
+          1.0583202159858307
+        ],
+        "rate_multiplier": 0.9312233193225108
+      },
+      {
+        "name": "5201_13",
+        "weeks": [
+          1,
+          0
+        ],
+        "demand_multipliers": [
+          1.1893670050338292,
+          1.2012242814634426
+        ],
+        "rate_multiplier": 0.908965570615833
+      },
+      {
+        "name": "5201_14",
+        "weeks": [
+          0,
+          0
+        ],
+        "demand_multipliers": [
+          1.0950710523771614,
+          1.0950710523771614
+        ],
+        "rate_multiplier": 1.0531051518843682
+      },
+      {
+        "name": "5201_15",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          1.1116667104900466,
+          1.0832468429530886
+        ],
+        "rate_multiplier": 0.9802756865616439
+      }
+    ],
+    "independent_check": [
+      {
+        "name": "62013_0",
+        "weeks": [
+          2,
+          2
+        ],
+        "demand_multipliers": [
+          0.8046187946430687,
+          0.8046187946430687
+        ],
+        "rate_multiplier": 0.9344807008009073
+      },
+      {
+        "name": "62013_1",
+        "weeks": [
+          0,
+          2
+        ],
+        "demand_multipliers": [
+          0.9271234104305868,
+          0.8964065577980646
+        ],
+        "rate_multiplier": 0.9503146926073103
+      },
+      {
+        "name": "62013_2",
+        "weeks": [
+          2,
+          3
+        ],
+        "demand_multipliers": [
+          1.0285688763666863,
+          1.026385519811172
+        ],
+        "rate_multiplier": 1.0404520284599972
+      },
+      {
+        "name": "62013_3",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          1.0446165080658272,
+          1.0179107854728895
+        ],
+        "rate_multiplier": 1.0342212966315452
+      },
+      {
+        "name": "62013_4",
+        "weeks": [
+          2,
+          3
+        ],
+        "demand_multipliers": [
+          1.0412225888574747,
+          1.0390123721015858
+        ],
+        "rate_multiplier": 0.9002005153601091
+      },
+      {
+        "name": "62013_5",
+        "weeks": [
+          2,
+          2
+        ],
+        "demand_multipliers": [
+          0.91569820218762,
+          0.91569820218762
+        ],
+        "rate_multiplier": 0.9199957835405942
+      },
+      {
+        "name": "62013_6",
+        "weeks": [
+          2,
+          3
+        ],
+        "demand_multipliers": [
+          0.9905022384599548,
+          0.9883996864527114
+        ],
+        "rate_multiplier": 1.0290193547294444
+      },
+      {
+        "name": "62013_7",
+        "weeks": [
+          1,
+          1
+        ],
+        "demand_multipliers": [
+          0.9935273260209773,
+          0.9935273260209773
+        ],
+        "rate_multiplier": 0.9675071878566721
+      },
+      {
+        "name": "62013_8",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          0.9346083351888591,
+          0.9107149822312127
+        ],
+        "rate_multiplier": 0.9970599393020897
+      },
+      {
+        "name": "62013_9",
+        "weeks": [
+          0,
+          3
+        ],
+        "demand_multipliers": [
+          0.841006570978371,
+          0.8114168167218998
+        ],
+        "rate_multiplier": 1.096530101458669
+      },
+      {
+        "name": "62013_10",
+        "weeks": [
+          3,
+          3
+        ],
+        "demand_multipliers": [
+          1.0116436070143853,
+          1.0116436070143853
+        ],
+        "rate_multiplier": 1.0647362785895722
+      },
+      {
+        "name": "62013_11",
+        "weeks": [
+          3,
+          2
+        ],
+        "demand_multipliers": [
+          1.086494698705353,
+          1.0888059212208325
+        ],
+        "rate_multiplier": 1.0019254231414825
+      },
+      {
+        "name": "62013_12",
+        "weeks": [
+          3,
+          0
+        ],
+        "demand_multipliers": [
+          0.8716688750284858,
+          0.9034558275214207
+        ],
+        "rate_multiplier": 0.9188356514181626
+      },
+      {
+        "name": "62013_13",
+        "weeks": [
+          1,
+          2
+        ],
+        "demand_multipliers": [
+          0.9933114463098488,
+          0.9699763239900635
+        ],
+        "rate_multiplier": 1.0686711682735919
+      },
+      {
+        "name": "62013_14",
+        "weeks": [
+          3,
+          3
+        ],
+        "demand_multipliers": [
+          0.8189309334022831,
+          0.8189309334022831
+        ],
+        "rate_multiplier": 0.9247443772293793
+      },
+      {
+        "name": "62013_15",
+        "weeks": [
+          3,
+          0
+        ],
+        "demand_multipliers": [
+          0.9665468548037671,
+          1.0017937012107114
+        ],
+        "rate_multiplier": 0.9983847658328106
+      },
+      {
+        "name": "62013_16",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          0.8361165007045455,
+          0.8147411010714907
+        ],
+        "rate_multiplier": 1.0466647022316393
+      },
+      {
+        "name": "62013_17",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          1.153479790233099,
+          1.1239909672471775
+        ],
+        "rate_multiplier": 1.086870457119048
+      },
+      {
+        "name": "62013_18",
+        "weeks": [
+          1,
+          1
+        ],
+        "demand_multipliers": [
+          0.8672537177867281,
+          0.8672537177867281
+        ],
+        "rate_multiplier": 1.046117711506554
+      },
+      {
+        "name": "62013_19",
+        "weeks": [
+          1,
+          1
+        ],
+        "demand_multipliers": [
+          1.2107919716079458,
+          1.2107919716079458
+        ],
+        "rate_multiplier": 0.9554732056493118
+      },
+      {
+        "name": "62013_20",
+        "weeks": [
+          1,
+          2
+        ],
+        "demand_multipliers": [
+          0.9047883001732179,
+          0.8835327858665131
+        ],
+        "rate_multiplier": 1.0559929936102834
+      },
+      {
+        "name": "62013_21",
+        "weeks": [
+          2,
+          1
+        ],
+        "demand_multipliers": [
+          1.0397310471067642,
+          1.0647442877022772
+        ],
+        "rate_multiplier": 0.9901267990462442
+      },
+      {
+        "name": "62013_22",
+        "weeks": [
+          3,
+          1
+        ],
+        "demand_multipliers": [
+          1.0837331346218277,
+          1.1121657604187336
+        ],
+        "rate_multiplier": 1.0727141622032845
+      },
+      {
+        "name": "62013_23",
+        "weeks": [
+          0,
+          1
+        ],
+        "demand_multipliers": [
+          0.9196640389702517,
+          0.91058604171302
+        ],
+        "rate_multiplier": 1.0823782481823625
+      },
+      {
+        "name": "62013_24",
+        "weeks": [
+          0,
+          3
+        ],
+        "demand_multipliers": [
+          1.1168678662169966,
+          1.077572280619057
+        ],
+        "rate_multiplier": 0.9288485737438247
+      },
+      {
+        "name": "62013_25",
+        "weeks": [
+          2,
+          0
+        ],
+        "demand_multipliers": [
+          0.9787555870181279,
+          1.012294265275395
+        ],
+        "rate_multiplier": 0.95344480004423
+      },
+      {
+        "name": "62013_26",
+        "weeks": [
+          0,
+          0
+        ],
+        "demand_multipliers": [
+          1.1707711892965813,
+          1.1707711892965813
+        ],
+        "rate_multiplier": 1.0283246542717337
+      },
+      {
+        "name": "62013_27",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          0.9834514562098621,
+          0.9583094241144761
+        ],
+        "rate_multiplier": 0.9242521261623364
+      },
+      {
+        "name": "62013_28",
+        "weeks": [
+          1,
+          3
+        ],
+        "demand_multipliers": [
+          1.128477670603321,
+          1.099628029236599
+        ],
+        "rate_multiplier": 0.9541807975973697
+      },
+      {
+        "name": "62013_29",
+        "weeks": [
+          0,
+          1
+        ],
+        "demand_multipliers": [
+          1.0928761592812732,
+          1.0820883864033015
+        ],
+        "rate_multiplier": 0.9564668697617934
+      },
+      {
+        "name": "62013_30",
+        "weeks": [
+          2,
+          2
+        ],
+        "demand_multipliers": [
+          0.8280206989316423,
+          0.8280206989316423
+        ],
+        "rate_multiplier": 0.9168852619557237
+      },
+      {
+        "name": "62013_31",
+        "weeks": [
+          1,
+          0
+        ],
+        "demand_multipliers": [
+          1.1714133644592097,
+          1.1830916538492382
+        ],
+        "rate_multiplier": 0.9292883683966111
+      }
+    ]
+  },
+  "weekly_effects": [
+    [
+      1.0199362041467304,
+      1.007487830191873
+    ],
+    [
+      1.0098684210526316,
+      0.9968715035539861
+    ],
+    [
+      0.9861443381180224,
+      0.985319710649988
+    ],
+    [
+      0.9840510366826156,
+      1.0103209556041535
+    ]
+  ],
+  "prices": [
+    {
+      "station_type": "airport",
+      "category": "compact",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6377999999999999,
+        0.7300999999999999,
+        0.8216,
+        0.9117,
+        1.0
+      ],
+      "slopes": [
+        1.063,
+        0.9229999999999996,
+        0.9150000000000006,
+        0.9009999999999998,
+        0.8830000000000007
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "airport",
+      "category": "economy",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6348,
+        0.728,
+        0.82,
+        0.9108,
+        1.0
+      ],
+      "slopes": [
+        1.058,
+        0.9319999999999997,
+        0.9199999999999989,
+        0.9080000000000013,
+        0.8919999999999997
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "airport",
+      "category": "midsize",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6948,
+        0.7756000000000001,
+        0.8528000000000001,
+        0.9279,
+        1.0
+      ],
+      "slopes": [
+        1.158,
+        0.8080000000000012,
+        0.7719999999999998,
+        0.7509999999999986,
+        0.7210000000000006
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "airport",
+      "category": "premium",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6911999999999999,
+        0.7728,
+        0.8512000000000001,
+        0.927,
+        1.0
+      ],
+      "slopes": [
+        1.152,
+        0.8160000000000014,
+        0.7839999999999996,
+        0.758,
+        0.7299999999999996
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "downtown",
+      "category": "compact",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6389999999999999,
+        0.7314999999999999,
+        0.8224,
+        0.9117,
+        1.0
+      ],
+      "slopes": [
+        1.065,
+        0.9250000000000005,
+        0.9090000000000001,
+        0.8929999999999996,
+        0.8830000000000007
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "downtown",
+      "category": "economy",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6617999999999999,
+        0.7496999999999999,
+        0.8352,
+        0.918,
+        1.0
+      ],
+      "slopes": [
+        1.103,
+        0.879,
+        0.8550000000000005,
+        0.8280000000000001,
+        0.8199999999999998
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    },
+    {
+      "station_type": "downtown",
+      "category": "midsize",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6486,
+        0.7392,
+        0.792,
+        0.9144,
+        1.0
+      ],
+      "slopes": [
+        1.081,
+        0.9060000000000004,
+        0.5280000000000002,
+        1.2239999999999998,
+        0.8560000000000003
+      ],
+      "nonmonotone": false,
+      "nonconcave": true
+    },
+    {
+      "station_type": "downtown",
+      "category": "premium",
+      "shares": [
+        0.0,
+        0.6,
+        0.7,
+        0.8,
+        0.9,
+        1.0
+      ],
+      "total_revenue_per_demand_base": [
+        0.0,
+        0.6762,
+        0.7608999999999999,
+        0.8432000000000001,
+        0.9225,
+        1.0
+      ],
+      "slopes": [
+        1.127,
+        0.8469999999999991,
+        0.8230000000000007,
+        0.7929999999999995,
+        0.7750000000000004
+      ],
+      "nonmonotone": false,
+      "nonconcave": false
+    }
+  ],
+  "source_hashes": {
+    "plans/level3_20261113T130545853303Z.csv": "5a262333e845f295d97ddc97133aa931bc5fdc70934b736021fb183c3739e973",
+    "plans/level4_20261113T134857657528Z.csv": "feeb2cebeb3ecfbee21441588b1c6c3bf0cbbe916daac7c6cf9f7997b51ffec5",
+    "plans/Level4robust.csv": "75506341d90a795d295ef96fa47ffce73b4745ad197ca1c2b25dc439b842163b",
+    "plans/level4robust_all_trucks_20261113.csv": "88f13c62e4d89ee3375c6f9b68b534864f4e84b4f478f2366d1f3912783c5044"
+  },
+  "input_hashes": {
+    "categories.csv": "6987fab44b0312c160930049082067673e5cddacd5cfdd23ddcc30dd19d4fe1c",
+    "check_values.csv": "8be9b7504c3757a56c30500469a3e0144eed337a39bea2b0a1c61ce1c395d6ad",
+    "distances.csv": "498485bab67a4fd811b6663df0a0662aa0fbfe6ae61f9229ddff14d7906fd8a0",
+    "fleet_snapshot.csv": "ce76462e7ae7a7aecd05bf24ee770aac55a06eb1e65cec209f2ac09654cff18c",
+    "horizon.csv": "59b52c49a29794845c0fb5b621aa23f8748dd243cb1319066be30f3590e4a127",
+    "price_factors.csv": "93371875734cac6d8ef525c4e81d64200fe0c2af07555db817016c42545c9a2e",
+    "reservations.csv": "6cde416230264ac3ec011704ef51ef2efd6c2672d01f18d244df8a1c41b9e0f7",
+    "stations.csv": "20b1b996945a26be23941e7fd7dfa957187aad41435930b0b544aa8301621602",
+    "transfer_costs.csv": "673ebac7c3606af30b2fb7c16ad41af8159662c7cd10a6a0423a4963742ba96d"
+  },
+  "implementation_hashes": {
+    "evaluate.py": "44c57f405fc13e4f40e4194388eb9b06a0fc0d6bc90f3793d8938eaad727df86",
+    "export_level0.py": "b78fff6e359df8a724e36f13cf1588082b7dce6c0a1c752c1d271b35593144e5",
+    "final_search.py": "b04a16f2d661d58bb7264036b05dd7b67c6053a32e4fb87043e8b8253b5f17e6",
+    "fleet.py": "cdb084663fe9c511c36923468449ab8ca01cf2d6d8d8dc433fc0ec5a9c2859a0",
+    "forecast.py": "1851ebabfc27a59a20ff57990b15cf615bbd58369745a6755c6320c6e86eb62e",
+    "planning.py": "ffdaf253b40fdb9621fb8aa2fb50c44e4faa55a2624ac582b708971d7e8d948f",
+    "robustness.py": "018de5364bfb305a95bb980f2a612db78345f8a9a97a43b9cb1062722a9cc552",
+    "run.py": "c1503f9999f6a0107c5a91e4cdf64fd6c3f0b2cfba8cda4b129f728215c414fc",
+    "__init__.py": "39e0fb87afd41c1e5156a1849869a232084d10b8f371d45d85a15750a4fe1567"
+  },
+  "provenance": "Final scenario search seeded by plans/level4robust_all_trucks_20261113.csv. Level4robust.csv is an independent GPT-generated external candidate, not our original search output.",
+  "official_status": "Unknown for the newly written final selection. New official trial recommended before final upload.",
+  "runtime_seconds": 257.16436399999657
+}
