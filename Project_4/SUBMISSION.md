@@ -71,7 +71,7 @@ The audit preserves the run's scenarios, inputs, edits and component totals. Off
 
 ## Demo
 
-`submission/slides.pdf` — five slides. For organizer submission, use the selected plan as `final.csv` in the team's shared folder.
+[Presentation slides](submission/slides.pdf) — five slides covering our approach, official results, robustness checks, and business next steps.
 
 ## Next steps
 
