@@ -1,4 +1,4 @@
-"""Bounded deterministic Level 1 local search; no global optimality guarantee."""
+"""Bounded Level 1 and driver-transfer searches; no global optimality guarantee."""
 
 from dataclasses import dataclass
 from time import perf_counter
@@ -221,9 +221,147 @@ def level1_plan(
                          time_limit_seconds=time_limit_seconds, max_rounds=max_rounds).plan
 
 
-def add_driver_transfers(*, instance: Instance, plan: pd.DataFrame) -> pd.DataFrame:
-    """Return a plan with feasible driver transfers added (later Level 2 work)."""
-    raise NotImplementedError("Driver transfer planning is not implemented")
+def search_driver_transfers(
+    *, instance: Instance, plan: pd.DataFrame, demand: pd.DataFrame,
+    base_revenue: pd.DataFrame, time_limit_seconds: float = 60,
+    max_rounds: int = 100, max_cars_per_transfer: int = 8,
+) -> SearchResult:
+    """Append improving driver transfers to an exact, valid Level 1 fallback.
+
+    Search every supplied route, category and departure whose arrival is inside
+    the horizon, with quantities 1..max_cars_per_transfer (also capped by all
+    future origin commitments). This quantity bound is a search setting, not a
+    driver-capacity rule. Repeated moves can send more cars. Add/remove rows
+    are fixed. Every accepted move is checked with the existing exact evaluator;
+    unsuccessful or exhausted searches retain the unchanged input plan.
+    """
+    if not np.isfinite(time_limit_seconds) or time_limit_seconds < 0:
+        raise ValueError("Time limit must be finite and nonnegative")
+    if not isinstance(max_rounds, int) or max_rounds < 0 or not isinstance(max_cars_per_transfer, int) or max_cars_per_transfer < 1:
+        raise ValueError("max_rounds must be nonnegative and max_cars_per_transfer positive integers")
+    started = perf_counter()
+    fallback = plan.copy(deep=True)
+    if not set(fallback["action"]) <= {"add", "remove"}:
+        raise ValueError("Driver search must start from an add/remove Level 1 plan")
+    exact = estimate_profit(instance=instance, plan=fallback, demand=demand, base_revenue=base_revenue)
+    reference_seconds = perf_counter() - started
+    references = {"saved_level1": {"valid": True, "totals": exact.copy(), "evaluation_seconds": reference_seconds}}
+    committed = committed_car_days(instance=instance)
+    cache = _Level1Cache(instance, committed, demand, base_revenue)
+    fleet = cache.fleet(cache.counts(fallback))
+    scores = np.array([cache.station_score(s, fleet[s]) for s in range(len(cache.stations))])
+    driver = instance.transfer_costs.set_index("mode").loc["driver"]
+    routes = sorted(
+        (cache.stations.index(row.from_station_id), cache.stations.index(row.to_station_id),
+         int(row.lead_time_days), float(driver.fixed_cost + driver.cost_per_km * row.distance_km))
+        for row in instance.distances.itertuples(index=False)
+        if row.from_station_id != row.to_station_id
+    )
+    deadline = started + max(0, time_limit_seconds - max(3.0, 3 * reference_seconds))
+    current = fallback.copy(deep=True)
+    trace = []
+    screened = 0
+    exact_rejections = 0
+    stop_reason = "round_limit"
+    for _ in range(max_rounds):
+        if perf_counter() >= deadline:
+            stop_reason = "time_limit"
+            break
+        best_gain, best = 1e-7, None
+        timed_out = False
+        for origin, destination, lead, unit_cost in routes:
+            if timed_out:
+                break
+            for day in range(len(cache.days) - lead):
+                if timed_out:
+                    break
+                arrival = day + lead
+                for category in range(len(cache.categories)):
+                    slack = fleet[origin, day:, category] - cache.committed[origin, day:, category]
+                    bound = min(max_cars_per_transfer, int(np.floor(slack.min())))
+                    for cars in range(1, bound + 1):
+                        if perf_counter() >= deadline:
+                            timed_out = True
+                            stop_reason = "time_limit"
+                            break
+                        screened += 1
+                        departing = fleet[origin].copy()
+                        arriving = fleet[destination].copy()
+                        departing[day:, category] -= cars
+                        arriving[arrival:, category] += cars
+                        if np.any(departing < cache.committed[origin]) or np.any(arriving < cache.committed[destination]):
+                            continue
+                        # station_score includes station holding costs. Restore
+                        # holding cost for the cars absent from both stations
+                        # during transit, so each car is charged once daily.
+                        transit_holding = cars * lead * cache.holding[category]
+                        gain = (cache.station_score(origin, departing) - scores[origin]
+                                + cache.station_score(destination, arriving) - scores[destination]
+                                - transit_holding - cars * unit_cost)
+                        if gain > best_gain:
+                            best_gain = float(gain)
+                            best = (origin, destination, category, day, arrival, cars, unit_cost)
+                    if timed_out:
+                        break
+        if best is None:
+            if not timed_out:
+                stop_reason = "no_improving_transfer"
+            break
+        origin, destination, category, day, arrival, cars, unit_cost = best
+        row = {"action": "transfer", "date": cache.days[day], "category": cache.categories[category],
+               "station_id": cache.stations[origin], "to_station_id": cache.stations[destination],
+               "mode": "driver", "cars": cars}
+        trial = pd.concat([current, pd.DataFrame([row], columns=PLAN_COLUMNS)], ignore_index=True)
+        try:
+            checked = estimate_profit(instance=instance, plan=trial, demand=demand, base_revenue=base_revenue)
+        except ValueError:
+            exact_rejections += 1
+            stop_reason = "exact_validation_rejected_move"
+            break
+        improvement = checked["profit"] - exact["profit"]
+        if not np.isclose(improvement, best_gain, rtol=0, atol=1e-6):
+            raise RuntimeError("Cached transfer gain disagrees with the exact evaluator")
+        if improvement <= 1e-7:
+            stop_reason = "no_exact_improvement"
+            break
+        current, exact = trial, checked
+        fleet[origin, day:, category] -= cars
+        fleet[destination, arrival:, category] += cars
+        scores[origin] = cache.station_score(origin, fleet[origin])
+        scores[destination] = cache.station_score(destination, fleet[destination])
+        trace.append({**row, "date": row["date"].strftime("%Y-%m-%d"),
+                      "arrival": cache.days[arrival].strftime("%Y-%m-%d"),
+                      "driver_cost": float(cars * unit_cost), "local_profit_gain": float(improvement)})
+        if timed_out:
+            break
+    validate_plan(instance=instance, plan=current)
+    final = estimate_profit(instance=instance, plan=current, demand=demand, base_revenue=base_revenue)
+    if final["profit"] < references["saved_level1"]["totals"]["profit"]:
+        current, final = fallback, references["saved_level1"]["totals"].copy()
+    return SearchResult(current, references, final, {
+        "time_limit_seconds": time_limit_seconds, "max_rounds": max_rounds,
+        "max_cars_per_transfer": max_cars_per_transfer,
+        "runtime_seconds": perf_counter() - started, "best_reference": "saved_level1",
+        "candidates_screened": screened, "accepted_moves": len(trace), "move_trace": trace,
+        "exact_rejections": exact_rejections, "stop_reason": stop_reason,
+        "search_scope": "fixed Level 1 actions; appended driver transfers arriving within horizon",
+    })
+
+
+def add_driver_transfers(
+    *, instance: Instance, plan: pd.DataFrame, demand: pd.DataFrame | None = None,
+    base_revenue: pd.DataFrame | None = None, time_limit_seconds: float = 60,
+    max_rounds: int = 100, max_cars_per_transfer: int = 8,
+) -> pd.DataFrame:
+    """Return the verified driver-transfer plan, or unchanged valid Level 1 input."""
+    if demand is None:
+        committed = committed_car_days(instance=instance)
+        demand = demand_to_come(instance=instance, committed=committed)
+    if base_revenue is None:
+        base_revenue = estimate_base_revenue(instance=instance)
+    return search_driver_transfers(instance=instance, plan=plan, demand=demand, base_revenue=base_revenue,
+                                   time_limit_seconds=time_limit_seconds, max_rounds=max_rounds,
+                                   max_cars_per_transfer=max_cars_per_transfer).plan
 
 
 def improve_with_trucks(*, instance: Instance, plan: pd.DataFrame) -> pd.DataFrame:

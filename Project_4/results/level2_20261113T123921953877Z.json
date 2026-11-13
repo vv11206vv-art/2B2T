@@ -1,0 +1,223 @@
+{
+  "label": "Local forecast estimates, not official scores",
+  "level": 2,
+  "starting_plan": {
+    "path": "plans/level1_20261113T020936672087Z.csv",
+    "sha256": "8af8e20ade3a9a684eb3aaca9f0c748231006f13f93dd3c39607a4057d750c8c"
+  },
+  "official_feedback_status": "not_submitted",
+  "candidate_csv": "plans\\level2_20261113T123921953877Z.csv",
+  "locally_valid": true,
+  "csv_round_trip_verified": true,
+  "total_runtime_seconds": 59.009978500002035,
+  "search": {
+    "time_limit_seconds": 60.0,
+    "max_rounds": 100,
+    "max_cars_per_transfer": 8,
+    "runtime_seconds": 57.93031609999889,
+    "best_reference": "saved_level1",
+    "candidates_screened": 367118,
+    "accepted_moves": 12,
+    "move_trace": [
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S03",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 13631.499941579998
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S03",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 13887.72541288333
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S02",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 12883.176895764656
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "compact",
+        "station_id": "S05",
+        "to_station_id": "S02",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 2184.0,
+        "local_profit_gain": 12776.43225196097
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S04",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 12101.391031316947
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "compact",
+        "station_id": "S05",
+        "to_station_id": "S03",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 2912.0,
+        "local_profit_gain": 11665.740374684334
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "compact",
+        "station_id": "S05",
+        "to_station_id": "S04",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 2766.3999999999996,
+        "local_profit_gain": 10826.132819008548
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "compact",
+        "station_id": "S05",
+        "to_station_id": "S02",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 2184.0,
+        "local_profit_gain": 10685.182250387035
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "compact",
+        "station_id": "S05",
+        "to_station_id": "S03",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 2912.0,
+        "local_profit_gain": 10683.925083341077
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S03",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 9881.000508692116
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "midsize",
+        "station_id": "S06",
+        "to_station_id": "S07",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 9136.708632240538
+      },
+      {
+        "action": "transfer",
+        "date": "2027-03-01",
+        "category": "premium",
+        "station_id": "S01",
+        "to_station_id": "S02",
+        "mode": "driver",
+        "cars": 8,
+        "arrival": "2027-03-02",
+        "driver_cost": 1164.8,
+        "local_profit_gain": 8443.907592353411
+      }
+    ],
+    "exact_rejections": 0,
+    "stop_reason": "time_limit",
+    "search_scope": "fixed Level 1 actions; appended driver transfers arriving within horizon"
+  },
+  "references": {
+    "saved_level1": {
+      "valid": true,
+      "totals": {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3038389.9276766228,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 0.0,
+        "profit": 3283544.735164718
+      },
+      "evaluation_seconds": 0.40582630000062636
+    }
+  },
+  "comparison": {
+    "saved_level1": {
+      "committed_revenue": 2851079.807488095,
+      "new_demand_revenue": 3038389.9276766228,
+      "holding_cost": 2553600.0,
+      "addition_cost": 52325.0,
+      "transfer_cost": 0.0,
+      "profit": 3283544.735164718,
+      "action_rows": 24,
+      "cars_add": 115,
+      "cars_remove": 233,
+      "cars_transfer": 0
+    },
+    "candidate": {
+      "committed_revenue": 2851079.807488095,
+      "new_demand_revenue": 3196104.7504708357,
+      "holding_cost": 2553600.0,
+      "addition_cost": 52325.0,
+      "transfer_cost": 21111.999999999996,
+      "profit": 3420147.5579589307,
+      "action_rows": 36,
+      "cars_add": 115,
+      "cars_remove": 233,
+      "cars_transfer": 96
+    }
+  },
+  "input_sha256": {
+    "categories.csv": "6987fab44b0312c160930049082067673e5cddacd5cfdd23ddcc30dd19d4fe1c",
+    "check_values.csv": "8be9b7504c3757a56c30500469a3e0144eed337a39bea2b0a1c61ce1c395d6ad",
+    "distances.csv": "498485bab67a4fd811b6663df0a0662aa0fbfe6ae61f9229ddff14d7906fd8a0",
+    "fleet_snapshot.csv": "ce76462e7ae7a7aecd05bf24ee770aac55a06eb1e65cec209f2ac09654cff18c",
+    "horizon.csv": "59b52c49a29794845c0fb5b621aa23f8748dd243cb1319066be30f3590e4a127",
+    "price_factors.csv": "93371875734cac6d8ef525c4e81d64200fe0c2af07555db817016c42545c9a2e",
+    "reservations.csv": "6cde416230264ac3ec011704ef51ef2efd6c2672d01f18d244df8a1c41b9e0f7",
+    "stations.csv": "20b1b996945a26be23941e7fd7dfa957187aad41435930b0b544aa8301621602",
+    "transfer_costs.csv": "673ebac7c3606af30b2fb7c16ad41af8159662c7cd10a6a0423a4963742ba96d"
+  },
+  "candidate_sha256": "cb2bc10951a407814e4e74e096acfc810acf0f9c40878388926bb1cd3523804e"
+}
