@@ -1,0 +1,387 @@
+{
+  "label": "Local forecast estimates, not official scores",
+  "level": 3,
+  "starting_plan": {
+    "path": "plans/level2_20261113T123921953877Z.csv",
+    "sha256": "cb2bc10951a407814e4e74e096acfc810acf0f9c40878388926bb1cd3523804e"
+  },
+  "official_feedback_status": "not_submitted",
+  "candidate_csv": "plans\\level3_20261113T130545853303Z.csv",
+  "locally_valid": true,
+  "csv_round_trip_verified": true,
+  "total_runtime_seconds": 119.22664900000018,
+  "search": {
+    "time_limit_seconds": 120.0,
+    "max_rounds": 100,
+    "max_cars_per_move": 16,
+    "runtime_seconds": 118.10983419999684,
+    "best_reference": "saved_level2",
+    "stop_reason": "time_limit",
+    "candidates_screened": 771065,
+    "screened_by_type": {
+      "group_mode": 242,
+      "mode": 280,
+      "remove": 280,
+      "resize": 1063,
+      "date": 3640,
+      "destination": 2240,
+      "origin": 2240,
+      "add": 761080
+    },
+    "invalid_by_type": {
+      "origin": 1733,
+      "add": 133820,
+      "resize": 110,
+      "date": 34
+    },
+    "accepted_moves": 19,
+    "move_trace": [
+      {
+        "kind": "add",
+        "local_profit_gain": 24295.665513290092,
+        "local_profit_after": 3444443.223472221,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S10",
+            "date": "2027-03-01",
+            "category": "midsize",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 21476.0074660033,
+        "local_profit_after": 3465919.230938224,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S04",
+            "date": "2027-03-03",
+            "category": "compact",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 21269.411074849777,
+        "local_profit_after": 3487188.642013074,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S09",
+            "date": "2027-03-01",
+            "category": "compact",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 20348.634172314778,
+        "local_profit_after": 3507537.2761853887,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S03",
+            "date": "2027-03-01",
+            "category": "compact",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 18847.705099514686,
+        "local_profit_after": 3526384.9812849034,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S04",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 18779.96995510999,
+        "local_profit_after": 3545164.9512400134,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S02",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 18770.978856123053,
+        "local_profit_after": 3563935.9300961364,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S10",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 16051.898081206717,
+        "local_profit_after": 3579987.828177343,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S02",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 15357.421776597388,
+        "local_profit_after": 3595345.2499539405,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S09",
+            "date": "2027-03-01",
+            "category": "premium",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 15184.136888271198,
+        "local_profit_after": 3610529.3868422117,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S09",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 14133.133905154653,
+        "local_profit_after": 3624662.5207473664,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S04",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 13063.855498710647,
+        "local_profit_after": 3637726.376246077,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S03",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 12847.773554762825,
+        "local_profit_after": 3650574.14980084,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S10",
+            "date": "2027-03-01",
+            "category": "midsize",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 10400.4264767766,
+        "local_profit_after": 3660974.5762776164,
+        "edits": [
+          {
+            "station_id": "S05",
+            "to_station_id": "S02",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 9593.179722266272,
+        "local_profit_after": 3670567.7559998827,
+        "edits": [
+          {
+            "station_id": "S06",
+            "to_station_id": "S08",
+            "date": "2027-03-01",
+            "category": "economy",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 9438.207778938115,
+        "local_profit_after": 3680005.963778821,
+        "edits": [
+          {
+            "station_id": "S01",
+            "to_station_id": "S04",
+            "date": "2027-03-01",
+            "category": "premium",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 8899.195737210102,
+        "local_profit_after": 3688905.159516031,
+        "edits": [
+          {
+            "station_id": "S01",
+            "to_station_id": "S02",
+            "date": "2027-03-01",
+            "category": "premium",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 8175.212998693809,
+        "local_profit_after": 3697080.3725147247,
+        "edits": [
+          {
+            "station_id": "S01",
+            "to_station_id": "S03",
+            "date": "2027-03-01",
+            "category": "premium",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      },
+      {
+        "kind": "add",
+        "local_profit_gain": 8861.154796350747,
+        "local_profit_after": 3705941.5273110755,
+        "edits": [
+          {
+            "station_id": "S01",
+            "to_station_id": "S03",
+            "date": "2027-03-01",
+            "category": "premium",
+            "mode": "truck",
+            "cars_delta": 16
+          }
+        ]
+      }
+    ],
+    "search_scope": "fixed additions/removals; transfer group modes, mode, remove, resize, date, origin, destination, add"
+  },
+  "references": {
+    "saved_level2": {
+      "valid": true,
+      "totals": {
+        "committed_revenue": 2851079.807488095,
+        "new_demand_revenue": 3196104.7504708357,
+        "holding_cost": 2553600.0,
+        "addition_cost": 52325.0,
+        "transfer_cost": 21111.999999999996,
+        "profit": 3420147.5579589307
+      },
+      "evaluation_seconds": 0.4236808999994537
+    }
+  },
+  "comparison": {
+    "saved_level2": {
+      "committed_revenue": 2851079.807488095,
+      "new_demand_revenue": 3196104.7504708357,
+      "holding_cost": 2553600.0,
+      "addition_cost": 52325.0,
+      "transfer_cost": 21111.999999999996,
+      "profit": 3420147.5579589307,
+      "action_rows": 36,
+      "cars_add": 115,
+      "cars_remove": 233,
+      "cars_transfer": 96,
+      "driver_rows": 12,
+      "cars_driver": 96,
+      "truck_rows": 0,
+      "cars_truck": 0
+    },
+    "candidate": {
+      "committed_revenue": 2851079.807488095,
+      "new_demand_revenue": 3522286.7198229805,
+      "holding_cost": 2553600.0,
+      "addition_cost": 52325.0,
+      "transfer_cost": 61500.0,
+      "profit": 3705941.5273110755,
+      "action_rows": 46,
+      "cars_add": 115,
+      "cars_remove": 233,
+      "cars_transfer": 400,
+      "driver_rows": 7,
+      "cars_driver": 96,
+      "truck_rows": 15,
+      "cars_truck": 304
+    }
+  },
+  "input_sha256": {
+    "categories.csv": "6987fab44b0312c160930049082067673e5cddacd5cfdd23ddcc30dd19d4fe1c",
+    "check_values.csv": "8be9b7504c3757a56c30500469a3e0144eed337a39bea2b0a1c61ce1c395d6ad",
+    "distances.csv": "498485bab67a4fd811b6663df0a0662aa0fbfe6ae61f9229ddff14d7906fd8a0",
+    "fleet_snapshot.csv": "ce76462e7ae7a7aecd05bf24ee770aac55a06eb1e65cec209f2ac09654cff18c",
+    "horizon.csv": "59b52c49a29794845c0fb5b621aa23f8748dd243cb1319066be30f3590e4a127",
+    "price_factors.csv": "93371875734cac6d8ef525c4e81d64200fe0c2af07555db817016c42545c9a2e",
+    "reservations.csv": "6cde416230264ac3ec011704ef51ef2efd6c2672d01f18d244df8a1c41b9e0f7",
+    "stations.csv": "20b1b996945a26be23941e7fd7dfa957187aad41435930b0b544aa8301621602",
+    "transfer_costs.csv": "673ebac7c3606af30b2fb7c16ad41af8159662c7cd10a6a0423a4963742ba96d"
+  },
+  "candidate_sha256": "5a262333e845f295d97ddc97133aa931bc5fdc70934b736021fb183c3739e973"
+}

@@ -2,6 +2,7 @@
 
 Level 1: .venv/Scripts/python.exe -m solution.run --time-limit 180
 Level 2: .venv/Scripts/python.exe -m solution.run --level 2 --time-limit 60
+Level 3: .venv/Scripts/python.exe -m solution.run --level 3 --time-limit 120 --max-rounds 100
 """
 
 import argparse
@@ -17,22 +18,29 @@ from fleetkit import baseline_plan, load_instance, write_plan
 from solution.evaluate import estimate_profit
 from solution.fleet import committed_car_days, validate_plan
 from solution.forecast import base_revenue, demand_to_come
-from solution.planning import search_level1, search_driver_transfers
+from solution.planning import search_level1, search_driver_transfers, search_level3
 
 
 def action_counts(plan: pd.DataFrame) -> dict[str, int]:
     """Count action rows and cars, including a zero transfer count for Level 1."""
-    return {"action_rows": len(plan), **{
+    counts = {"action_rows": len(plan), **{
         f"cars_{action}": int(plan.loc[plan.action.eq(action), "cars"].sum())
         for action in ("add", "remove", "transfer")
     }}
+    for mode in ("driver", "truck"):
+        transfer = plan.action.eq("transfer") & plan["mode"].eq(mode)
+        counts[f"{mode}_rows"] = int(transfer.sum())
+        counts[f"cars_{mode}"] = int(plan.loc[transfer, "cars"].sum())
+    return counts
 
 
 def main() -> None:
     """Write fresh candidate/comparison artifacts and verify a CSV round trip."""
     parser = argparse.ArgumentParser(description="Local forecast estimates; no official submission")
-    parser.add_argument("--level", type=int, choices=[1, 2], default=1)
+    parser.add_argument("--level", type=int, choices=[1, 2, 3], default=1)
     parser.add_argument("--level1-plan", default="plans/level1_20261113T020936672087Z.csv", help="exact saved fallback for Level 2, relative to Project_4")
+    parser.add_argument("--level2-plan", default="plans/level2_20261113T123921953877Z.csv", help="exact saved fallback for Level 3, relative to Project_4")
+    parser.add_argument("--max-cars-per-move", type=int, default=16, help="Level 3 quantity increment bound; not truck capacity")
     parser.add_argument("--max-cars-per-transfer", type=int, default=8, help="per-move search quantity bound, not driver capacity")
     parser.add_argument("--time-limit", type=float, default=180, help="search budget in seconds (default 180)")
     parser.add_argument("--max-rounds", type=int, default=500, help="deterministic accepted-move limit")
@@ -45,19 +53,24 @@ def main() -> None:
     base = base_revenue(instance=instance)
     print(f"Local forecast estimates: {len(demand)} demand cells, {len(base)} base rates.", flush=True)
     starting_plan = None
-    if args.level == 2:
-        source_path = (project_dir / args.level1_plan).resolve()
+    if args.level in (2, 3):
+        source_path = (project_dir / (args.level1_plan if args.level == 2 else args.level2_plan)).resolve()
         if not source_path.is_relative_to(project_dir):
-            raise ValueError("Level 1 fallback must be inside Project_4")
+            raise ValueError("Saved fallback must be inside Project_4")
         source_bytes = source_path.read_bytes()
         source_plan = pd.read_csv(source_path, parse_dates=["date"])
         starting_plan = {"path": source_path.relative_to(project_dir).as_posix(),
                          "sha256": hashlib.sha256(source_bytes).hexdigest()}
-        result = search_driver_transfers(instance=instance, plan=source_plan, demand=demand, base_revenue=base,
-                                         time_limit_seconds=args.time_limit, max_rounds=args.max_rounds,
-                                         max_cars_per_transfer=args.max_cars_per_transfer)
+        if args.level == 2:
+            result = search_driver_transfers(instance=instance, plan=source_plan, demand=demand, base_revenue=base,
+                                             time_limit_seconds=args.time_limit, max_rounds=args.max_rounds,
+                                             max_cars_per_transfer=args.max_cars_per_transfer)
+        else:
+            result = search_level3(instance=instance, plan=source_plan, demand=demand, base_revenue=base,
+                                   time_limit_seconds=args.time_limit, max_rounds=args.max_rounds,
+                                   max_cars_per_move=args.max_cars_per_move)
         if source_path.read_bytes() != source_bytes:
-            raise RuntimeError("Level 1 fallback changed during search")
+            raise RuntimeError("Saved fallback changed during search")
     else:
         result = search_level1(instance=instance, committed=committed, demand=demand, base_revenue=base,
                                time_limit_seconds=args.time_limit, max_rounds=args.max_rounds)
@@ -76,7 +89,7 @@ def main() -> None:
     replay = estimate_profit(instance=instance, plan=reloaded, demand=demand, base_revenue=base)
     if any(abs(replay[key] - result.totals[key]) > 1e-6 for key in replay):
         raise RuntimeError("Written candidate does not reproduce the reported totals")
-    reference_plans = ({"saved_level1": source_plan} if args.level == 2 else
+    reference_plans = ({f"saved_level{args.level - 1}": source_plan} if args.level in (2, 3) else
                        {"do_nothing": pd.DataFrame(columns=result.plan.columns), "baseline": baseline_plan(instance=instance)})
     comparison = {}
     for name, reference in result.references.items():
@@ -131,6 +144,25 @@ def main() -> None:
             lines.append(f"| {move['date']} | {move['arrival']} | {move['category']} | {move['station_id']} | {move['to_station_id']} | {move['cars']} | {move['driver_cost']:,.2f} | {move['local_profit_gain']:,.2f} |")
         if not result.statistics["move_trace"]:
             lines.append("No improving transfer was found within the configured search; the saved Level 1 plan was retained unchanged.")
+    if args.level == 3:
+        lines += ["", f"Exact saved Level 2 fallback: `{starting_plan['path']}`.",
+                  f"Fallback SHA-256: `{starting_plan['sha256']}`.",
+                  f"Move quantity increment bound: {args.max_cars_per_move} cars; truck capacity remains eight.",
+                  f"Candidate changes screened: {result.statistics['screened_by_type']}.",
+                  f"Invalid changes rejected: {result.statistics['invalid_by_type']}.",
+                  "Truck costs group ALL categories by origin, destination and departure date, then charge ceil(total/8) trucks.",
+                  "Upgrades are evaluated as service of immediately lower-category new demand after own demand, never as CSV actions or upgrades of commitments.",
+                  "Official Level 3 feedback is unavailable. The comparison above uses LOCAL estimates for BOTH plans, not the official Level 2 profit.",
+                  "Final hidden-scenario performance is unknown; no submission was made.",
+                  "", "## Accepted changes", "",
+                  "| Change | Local profit gain | Local profit after |", "| --- | ---: | ---: |"]
+        for move in result.statistics["move_trace"]:
+            lines.append(f"| {move['kind']} | {move['local_profit_gain']:,.2f} | {move['local_profit_after']:,.2f} |")
+        if not result.statistics["move_trace"]:
+            lines.append("No improving Level 3 change was found; the unchanged saved Level 2 fallback was retained.")
+        lines += ["", "## Selected transfers", "", "| Departure | Category | Origin | Destination | Mode | Cars |", "| --- | --- | --- | --- | --- | ---: |"]
+        for row in reloaded.loc[reloaded.action.eq("transfer")].itertuples(index=False):
+            lines.append(f"| {row.date:%Y-%m-%d} | {row.category} | {row.station_id} | {row.to_station_id} | {row.mode} | {row.cars} |")
     with report_path.open("x", encoding="utf-8") as output:
         output.write("\n".join(lines) + "\n")
     print("\n".join(lines), flush=True)

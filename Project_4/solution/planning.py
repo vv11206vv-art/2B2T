@@ -1,6 +1,7 @@
 """Bounded Level 1 and driver-transfer searches; no global optimality guarantee."""
 
 from dataclasses import dataclass
+from collections import Counter
 from time import perf_counter
 
 import numpy as np
@@ -364,9 +365,195 @@ def add_driver_transfers(
                                    max_cars_per_transfer=max_cars_per_transfer).plan
 
 
-def improve_with_trucks(*, instance: Instance, plan: pd.DataFrame) -> pd.DataFrame:
-    """Return a plan with truck-capacity improvements (later Level 3 work)."""
-    raise NotImplementedError("Truck planning is not implemented")
+def _level3_moves(counts, routes, categories, days, max_cars):
+    """Stable neighborhood; transfer keys are origin, destination, day, category, mode.
+
+    Groups change mode together across categories. Other edits change one
+    aggregate transfer: cancel, resize, change mode/origin/destination/date.
+    New transfers try 1, 8, 9 and the configured maximum (within that maximum).
+    """
+    active = sorted(key for key, cars in counts.items() if cars > 0)
+    for origin, destination, day in sorted({key[:3] for key in active}):
+        for mode in ("driver", "truck"):
+            members = [key for key in active if key[:3] == (origin, destination, day) and key[4] == mode]
+            edits = []
+            for key in members:
+                edits += [(key, -counts[key]), (key[:4] + ("truck" if mode == "driver" else "driver",), counts[key])]
+            if edits:
+                yield "group_mode", edits
+    for key in active:
+        origin, destination, day, category, mode = key
+        cars = counts[key]
+        other = key[:4] + ("truck" if mode == "driver" else "driver",)
+        yield "mode", [(key, -cars), (other, cars)]
+        yield "remove", [(key, -cars)]
+        for delta in sorted({-8, -1, 1, 8}):
+            if cars + delta > 0 and abs(delta) <= max_cars:
+                yield "resize", [(key, delta)]
+        for new_day in range(days):
+            if new_day != day:
+                yield "date", [(key, -cars), ((origin, destination, new_day, category, mode), cars)]
+        for new_origin, new_destination in sorted(routes):
+            if new_destination == destination and new_origin != origin:
+                yield "origin", [(key, -cars), ((new_origin, destination, day, category, mode), cars)]
+            if new_origin == origin and new_destination != destination:
+                yield "destination", [(key, -cars), ((origin, new_destination, day, category, mode), cars)]
+    quantities = sorted({q for q in (1, 8, 9, max_cars) if q <= max_cars})
+    for origin, destination in sorted(routes):
+        for day in range(days):
+            for category in range(categories):
+                for mode in ("driver", "truck"):
+                    for cars in quantities:
+                        yield "add", [((origin, destination, day, category, mode), cars)]
+
+
+def search_level3(
+    *, instance: Instance, plan: pd.DataFrame, demand: pd.DataFrame,
+    base_revenue: pd.DataFrame, time_limit_seconds: float = 120,
+    max_rounds: int = 100, max_cars_per_move: int = 16,
+) -> SearchResult:
+    """Best-improvement transfer edits around a fixed Level 2 add/remove plan.
+
+    All candidates receive a whole-plan estimated profit, using cached fixed
+    inputs with full-category station scoring and all-category truck grouping.
+    Field validity and unchanged add/remove caps follow by construction; daily
+    coverage is checked at every affected station. Accepted improvements and
+    final selection must pass the existing exact evaluator and full checker.
+    This finite neighborhood and wall-clock/round limits do not prove optimality.
+    """
+    if not np.isfinite(time_limit_seconds) or time_limit_seconds < 0:
+        raise ValueError("Time limit must be finite and nonnegative")
+    if not isinstance(max_rounds, int) or max_rounds < 0 or not isinstance(max_cars_per_move, int) or max_cars_per_move < 1:
+        raise ValueError("Round limit must be nonnegative and move quantity limit positive integers")
+    started = perf_counter()
+    fallback = plan.copy(deep=True)
+    exact = estimate_profit(instance=instance, plan=fallback, demand=demand, base_revenue=base_revenue)
+    reference_seconds = perf_counter() - started
+    reference = exact.copy()
+    cache = _Level1Cache(instance, committed_car_days(instance=instance), demand, base_revenue)
+    index = pd.MultiIndex.from_product([cache.stations, cache.days, cache.categories], names=["station_id", "date", "category"])
+    fleet = simulate_fleet(instance=instance, plan=fallback).set_index(index.names).station_fleet.reindex(index).to_numpy(dtype=float).reshape(cache.start.shape)
+    scores = np.array([cache.station_score(s, fleet[s]) for s in range(len(cache.stations))])
+    routes = {(cache.stations.index(row.from_station_id), cache.stations.index(row.to_station_id)): (int(row.lead_time_days), float(row.distance_km)) for row in instance.distances.itertuples(index=False)}
+    costs = instance.transfer_costs.set_index("mode")
+    unit_cost = {(o, d, mode): float(costs.loc[mode, "fixed_cost"] + costs.loc[mode, "cost_per_km"] * distance)
+                 for (o, d), (_, distance) in routes.items() for mode in ("driver", "truck")}
+    fixed = fallback.loc[~fallback.action.eq("transfer")].copy()
+    counts = Counter()
+    for row in fallback.loc[fallback.action.eq("transfer")].itertuples(index=False):
+        counts[(cache.stations.index(row.station_id), cache.stations.index(row.to_station_id), cache.days.get_loc(pd.Timestamp(row.date)), cache.categories.index(row.category), row.mode)] += int(row.cars)
+
+    def transfer_cost(state):
+        trucks = Counter()
+        total = 0.0
+        for (o, d, day, k, mode), cars in state.items():
+            if mode == "driver":
+                total += cars * unit_cost[o, d, mode]
+            else:
+                trucks[o, d, day] += cars  # Deliberately omit category.
+        return total + sum(((cars + 7) // 8) * unit_cost[o, d, "truck"] for (o, d, day), cars in trucks.items())
+
+    def as_plan(state):
+        rows = [("transfer", cache.days[day], cache.categories[k], cache.stations[o], cache.stations[d], mode, cars)
+                for (o, d, day, k, mode), cars in sorted(state.items()) if cars > 0]
+        return pd.concat([fixed, pd.DataFrame(rows, columns=PLAN_COLUMNS)], ignore_index=True)
+
+    old_transfer_cost = transfer_cost(counts)
+    if not np.isclose(old_transfer_cost, exact["transfer_cost"], rtol=0, atol=1e-6):
+        raise RuntimeError("Cached grouped transfer cost disagrees with exact fallback")
+    deadline = started + max(0, time_limit_seconds - max(3.0, 3 * reference_seconds))
+    screened, invalid, trace = Counter(), Counter(), []
+    current = fallback.copy(deep=True)
+    stop_reason = "round_limit"
+    for _ in range(max_rounds):
+        if perf_counter() >= deadline:
+            stop_reason = "time_limit"
+            break
+        best_gain, best = 1e-7, None
+        timed_out = False
+        for kind, edits in _level3_moves(counts, routes, len(cache.categories), len(cache.days), max_cars_per_move):
+            if perf_counter() >= deadline:
+                stop_reason, timed_out = "time_limit", True
+                break
+            screened[kind] += 1
+            state = counts.copy()
+            changed = {}
+            transit_delta = 0.0
+            for (o, d, day, k, mode), delta in edits:
+                key = (o, d, day, k, mode)
+                state[key] += delta
+                if state[key] < 0:
+                    break
+                if not state[key]:
+                    del state[key]
+                lead = routes[o, d][0]
+                arrival = day + lead
+                if o not in changed:
+                    changed[o] = fleet[o].copy()
+                if d not in changed:
+                    changed[d] = fleet[d].copy()
+                changed[o][day:, k] -= delta
+                changed[d][arrival:, k] += delta
+                transit_delta += delta * min(lead, len(cache.days) - day) * cache.holding[k]
+            else:
+                if any(np.any(values < cache.committed[s]) for s, values in changed.items()):
+                    invalid[kind] += 1
+                    continue
+                new_cost = transfer_cost(state)
+                gain = sum(cache.station_score(s, values) - scores[s] for s, values in changed.items()) - transit_delta - new_cost + old_transfer_cost
+                if gain > best_gain:
+                    best_gain = float(gain)
+                    best = (kind, edits, state, changed, new_cost)
+                continue
+            invalid[kind] += 1
+        if best is None:
+            if not timed_out:
+                stop_reason = "local_optimum"
+            break
+        kind, edits, state, changed, new_cost = best
+        trial = as_plan(state)
+        checked = estimate_profit(instance=instance, plan=trial, demand=demand, base_revenue=base_revenue)
+        improvement = checked["profit"] - exact["profit"]
+        if not np.isclose(improvement, best_gain, rtol=0, atol=1e-6):
+            raise RuntimeError("Cached whole-plan Level 3 gain disagrees with exact evaluator")
+        if improvement <= 1e-7:
+            stop_reason = "no_exact_improvement"
+            break
+        current, exact, counts, old_transfer_cost = trial, checked, state, new_cost
+        for s, values in changed.items():
+            fleet[s] = values
+            scores[s] = cache.station_score(s, values)
+        trace.append({"kind": kind, "local_profit_gain": float(improvement), "local_profit_after": float(exact["profit"]),
+                      "edits": [{"station_id": cache.stations[o], "to_station_id": cache.stations[d], "date": cache.days[day].strftime("%Y-%m-%d"),
+                                 "category": cache.categories[k], "mode": mode, "cars_delta": int(delta)} for (o, d, day, k, mode), delta in edits]})
+        if timed_out:
+            break
+    validate_plan(instance=instance, plan=current)
+    final = estimate_profit(instance=instance, plan=current, demand=demand, base_revenue=base_revenue)
+    if final["profit"] < reference["profit"]:
+        current, final = fallback, reference.copy()
+    return SearchResult(current, {"saved_level2": {"valid": True, "totals": reference, "evaluation_seconds": reference_seconds}}, final, {
+        "time_limit_seconds": time_limit_seconds, "max_rounds": max_rounds, "max_cars_per_move": max_cars_per_move,
+        "runtime_seconds": perf_counter() - started, "best_reference": "saved_level2", "stop_reason": stop_reason,
+        "candidates_screened": sum(screened.values()), "screened_by_type": dict(screened), "invalid_by_type": dict(invalid),
+        "accepted_moves": len(trace), "move_trace": trace,
+        "search_scope": "fixed additions/removals; transfer group modes, mode, remove, resize, date, origin, destination, add",
+    })
+
+
+def improve_with_trucks(
+    *, instance: Instance, plan: pd.DataFrame, demand: pd.DataFrame | None = None,
+    base_revenue: pd.DataFrame | None = None, time_limit_seconds: float = 120,
+    max_rounds: int = 100, max_cars_per_move: int = 16,
+) -> pd.DataFrame:
+    """Return a locally verified Level 3 candidate or the unchanged fallback."""
+    if demand is None:
+        demand = demand_to_come(instance=instance, committed=committed_car_days(instance=instance))
+    if base_revenue is None:
+        base_revenue = estimate_base_revenue(instance=instance)
+    return search_level3(instance=instance, plan=plan, demand=demand, base_revenue=base_revenue,
+                         time_limit_seconds=time_limit_seconds, max_rounds=max_rounds,
+                         max_cars_per_move=max_cars_per_move).plan
 
 
 def build_plan(*, instance: Instance, time_limit_seconds: float = 180, max_rounds: int = 500) -> pd.DataFrame:
